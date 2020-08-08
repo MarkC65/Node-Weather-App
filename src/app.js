@@ -11,7 +11,7 @@ const publicPath = path.join(__dirname,'../public')
 const viewsPath = path.join(__dirname,'../templates/views')
 const partialsPath = path.join(__dirname,'../templates/partials')
 const faviconPath = path.join(__dirname,'../public/images/favicon.ico')
-const port = process.env.PORT
+const port = process.env.PORT || 3000
 
 app.set('views', viewsPath)
 app.set('view engine', 'hbs')
