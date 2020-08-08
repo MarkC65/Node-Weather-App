@@ -1,7 +1,10 @@
 const request = require('request')
+const fs = require('fs')
+const path = require('path')
 
 const geocode = (address, callback) => {
-  const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'+ encodeURIComponent(address) + '.json?access_token=pk.eyJ1IjoibWFyay1jaGFsaW5kZXIiLCJhIjoiY2tkZnplcW95MjBwejJ1dDlraHRsN2d5ayJ9.fkwVgtY5sD8j0Rhm_DF49Q&limit=1'
+  const keyCode = fs.readFileSync(path.join(__dirname,'../../access-keys/mapbox.key')).toString()
+  const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'+ encodeURIComponent(address) + '.json?access_token='+keyCode+'&limit=1'
   request({url, json: true}, (error, {body}={}) => {
     if (error) {
       callback('Unable to connect to location services (1)')

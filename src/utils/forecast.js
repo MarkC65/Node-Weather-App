@@ -1,7 +1,11 @@
 const request = require('request')
+const fs = require('fs')
+const path = require('path')
 
 const forecast = (longitude, latitude, callback) => {
-  const url = 'http://api.weatherstack.com/current?access_key=3b90fe660bf279b499eb83be648dc376&query='+latitude+','+longitude+'&units=m'
+  const keyCode = fs.readFileSync(path.join(__dirname,'../../access-keys/weatherstack.key')).toString()
+  const url = 'http://api.weatherstack.com/current?access_key='+keyCode+'&query='+latitude+','+longitude+'&units=m'
+  // console.log (url)
   request({url, json: true}, (error, {body}={}) => {
     if (error) {
       callback('Unable to connect to weather service (2)')
